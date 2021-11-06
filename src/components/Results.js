@@ -9,8 +9,18 @@ const styles = {
   },
 };
 
-const Results = ({ status }) => {
+// Accepts status from FSM example and isCorrect from non-FSM example
+const Results = ({ status, isCorrect }) => {
+  if (!status) {
+    return (
+      <div style={styles.box}>
+        {isCorrect ? <span>Winner 🎉</span> : <span>Looser 👎</span>}
+      </div>
+    );
+  }
+
   const show = status === STATUSES.VICTORY || status === STATUSES.DEFEAT;
+
   return (
     show && (
       <div style={styles.box}>

@@ -1,8 +1,9 @@
 import React from "react";
 import serialize from "form-serialize";
-import { decode } from "html-entities";
+import Button from "@mui/lab/LoadingButton";
 import { fetchQuestions, getIsResultCorrect } from "../../utils";
-import Answers from "../../components/Answers";
+import Question from "../../components/Question";
+import Results from "../../components/Results";
 
 function QuizNoFSM() {
   const [questions, setQuestions] = React.useState([]);
@@ -50,30 +51,28 @@ function QuizNoFSM() {
   };
 
   return (
-    <div className="App">
-      <button onClick={getQuestions}>Start a quiz</button>
-      {isQuizLoading && <div>Loading...</div>}
+    <div>
+      <Button
+        loading={isQuizLoading}
+        onClick={getQuestions}
+        variant="contained"
+      >
+        Load a quiz
+      </Button>
+
       {quizRequestError && <div>{quizRequestError}</div>}
 
       {!isFormSubmitted && !isQuizLoading && questions.length > 0 ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {questions.map(({ question }, index) => {
-            return (
-              <div key={index}>
-                {decode(question)}
-                <Answers index={index} />
-              </div>
-            );
+            return <Question key={index} question={question} index={index} />;
           })}
-          <button type="submit">Submit</button>
-          {isSubmitLoading && <div>Checking results...</div>}
+          <Button type="submit" loading={isSubmitLoading} variant="contained">
+            Get results
+          </Button>
         </form>
       ) : null}
-      <div>
-        {isFormSubmitted && (
-          <span>Result: {isResultCorrect ? "Correct" : "Wrong"}</span>
-        )}
-      </div>
+      <div>{isFormSubmitted && <Results isCorrect={isResultCorrect} />}</div>
     </div>
   );
 }

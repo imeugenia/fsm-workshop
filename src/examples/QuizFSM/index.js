@@ -40,7 +40,7 @@ function QuizFSM() {
   }, [state.status, state.questions]);
 
   return (
-    <div className="App">
+    <div>
       <Button
         loading={state.status === STATUSES.LOADING_QUIZ}
         onClick={() => dispatch({ event: "start" })}
