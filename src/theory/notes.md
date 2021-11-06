@@ -1,0 +1,2 @@
+- explain how useReducer works
+- prepare templates fullfill (eg. reducer, statuses)
