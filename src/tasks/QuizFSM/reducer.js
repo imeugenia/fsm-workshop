@@ -1,12 +1,12 @@
-// 1️⃣ Define the statuses based on the state chart we have just created
+// 1️⃣ Define the statuses based on the state chart we created in the previous exercise
 export const STATUSES = {
   IDLE: "IDLE",
   // 👉 Add more statuses below
 };
 
-// 2️⃣ The next step is creating an initial state. Currently, it consists of
-// a status. We can add more data like `questions` and `error`, but for now skip
-// it as it already defined :)
+// 2️⃣ Create an initial state. Currently, it consists only of a status.
+// We might add more data like `questions` soon, but for now skip
+// it as `status` it already defined :)
 export const initialState = {
   status: STATUSES.IDLE,
 };
@@ -21,7 +21,7 @@ function reducer(state, action) {
     //      status: STATUSES.LOADING_QUIZ,
     //   };
     // }
-    // ❗️ In case the state has not just `status` but other fields like `questions` and `error`,
+    // ❗️ In case the state has not just `status` but other fields like `questions`,
     // we should be careful about not loosing it. To do so, ensure you add initial state and
     // new values for every field.
 

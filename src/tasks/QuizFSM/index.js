@@ -1,18 +1,17 @@
 import React from "react";
 import serialize from "form-serialize";
-import { decode } from "html-entities";
 import { fetchQuestions, getIsResultCorrect } from "../../utils";
-import Answers from "../../components/Answers";
+import Button from "@mui/lab/LoadingButton";
+import Question from "../../components/Question";
+import Results from "../../components/Results";
 import reducer, { STATUSES, initialState } from "./reducer";
 
 function QuizFSM() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
   const formRef = React.useRef(null);
 
-  console.log(state.status === STATUSES.LOADING_RESULTS);
-
   const startQuiz = () => {
-    // 4️⃣ Dispatch event to reducer
+    // 4️⃣ Dispatch start event to reducer
     // Eg.: dispatch({ event: 'start' })
   };
 
@@ -26,59 +25,72 @@ function QuizFSM() {
   // that should be handled inside `React.useEffect()` hook.
   React.useEffect(() => {
     // Here is the logic to be implemented:
-    //    1. If the status has changed to "loading quiz", trigger a request that is handled inside
-    //       `fetchQuestions` helper.
+    //    1. If the status has changed to "loading quiz", call `fetchQuestions` function
+    //       that triggers a request .
     //    ❗️ `fetchQuestions` is asynchronous and should be used with Promise or async/await syntax.
-    //    💡 Data returned from `fetchQuestions` has the following structure:
-    // !!!!!!!!!!!!!!!!!!!!
+    //    💡 You can find data returned from `fetchQuestions` sample in "./dataSample.json"
     //    2. Questions should be saved in a state. You have 2 options where to store them:
     //        - inside component state
     //        - inside reducer state
     //    💡 To keep component clean from the logic, I would recommend to store all kind of data inside
     //    reducer state. In order to do this
-    //        - go back to `reducer.js` file and add `questions: []` to the `initialState`,
-    //        - dispatch "request succeed" action that contains `event` and `questions`.
+    //        - go back to `./reducer.js` file and add `questions: []` to the `initialState`,
+    //        - dispatch "Request succeed" action that contains `event` and `questions`.
     //          Eg.: dispatch({ event: "request_succeed", questions: data.results });
   }, [state.status]);
 
   React.useEffect(() => {
-    // 9️⃣ Once the machine enters "LOADING_RESULTS" state, we should check for the correctness of the answers
-    //  and transition to the next state based on the result. Uncomment the line before and dispatch an event
-    //  according to the results.
-    // if (state.status === STATUSES.LOADING_RESULTS) {
-    //   const answers = serialize(formRef.current, { hash: true });
-    //   const isCorrect = getIsResultCorrect(state.questions, answers);
-    //   // 👉 Dispatch an event here
-    // }
+    // 9️⃣ Part 1. Once "Get results" button is clicked the machine should enter the "Loading results" state.
+    //  In case of this state, check for the correctness of the answers and transition to the next
+    //  state based on the result. Here is what you need to do:
+    //    1. Add an "if" statement to check for "Loading results" state.
+    //    2. Check for the correctness of the answers using the following lines of code:
+    //      const answers = serialize(formRef.current, { hash: true });
+    //      const isCorrect = getIsResultCorrect(state.questions, answers);
+    //    3. Transition to the next state using `dispatch`.
   }, [state.status, state.questions]);
 
   return (
-    <div className="App">
-      <button onClick={startQuiz}>Start a quiz</button>
-      {/* 5️⃣ Check if the status is "loading" and display Loading indicator accordingly */}
-      {/* Eg.: {state.status === STATUSES.LOADING_QUIZ && <div>Loading...</div>} */}
-      {state.status === STATUSES.FAILURE && <div>{state.error}</div>}
+    <div>
+      <Button
+        // 5️⃣ Check if the status is "loading" and set button loading prop accordingly
+        // loading={}
+        onClick={startQuiz}
+        variant="contained"
+      >
+        Load a quiz
+      </Button>
 
-      {state.status === STATUSES.QUIZ ? (
+      {/* 🔥 If you are on fire today, here is an extra task.
+          A request to get questions might fail and you need to handle this error. 
+          Check Trivia API docs: https://opentdb.com/api_config.php to find out error response body.
+          In the first `useEffect` hook, add a condition to check for an error and, in case of a request  
+          error, dispatch a failure event. Also, there should be an additional failure state added to reducer. 
+      */}
+      {/* {state.status === STATUSES.FAILURE && <div>Quiz failed successfully. 💩 </div>} */}
+
+      {state.status === STATUSES.QUIZ ||
+      state.status === STATUSES.LOADING_RESULTS ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {/* 7️⃣ Uncomment the code below. ❗️ In case you are not storing questions in reducer state 
               change `state.questions` to the component state variable you have defined. */}
           {/* {state.questions.map(({ question }, index) => {
-            return (
-              <div key={index}>
-                {decode(question)}
-                <Answers index={index} />
-              </div>
-            );
+            return <Question key={index} question={question} index={index} />;
           })} */}
-          <button type="submit">Submit</button>
-          {state.status === STATUSES.LOADING_RESULTS && (
-            <div>Checking results...</div>
-          )}
+          {/* 9️⃣ Part 2. 
+              Check if the status is "loading results" and set button loading prop accordingly
+          */}
+          <Button
+            type="submit"
+            // loading={}
+            variant="contained"
+          >
+            Get results
+          </Button>
         </form>
       ) : null}
-      {/* 🔟 Display `CorrectResult` component, if the status is "VICTORY" and 
-          `WrongResult` component, if the status is "DEFEAT" */}
+      {/* 🔟  Uncomment the line below to enable display of the results based on the state */}
+      {/* <Results status={state.status} /> */}
     </div>
   );
 }
