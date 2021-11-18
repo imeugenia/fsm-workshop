@@ -11,7 +11,7 @@ function QuizFSM() {
   const formRef = React.useRef(null);
 
   const startQuiz = () => {
-    // 4️⃣ Dispatch start event to reducer
+    // 4️⃣ Dispatch start event to the reducer
     // Eg.: dispatch({ event: 'start' })
   };
 

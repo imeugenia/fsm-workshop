@@ -12,6 +12,7 @@ import QuizFSM from "./examples/QuizFSM";
 import Toggle from "./examples/OnOff";
 import TaskQuiz from "./tasks/QuizFSM";
 import TaskToggle from "./tasks/OnOff";
+import Slides from "./theory/Slides";
 
 export default function App() {
   return (
@@ -29,6 +30,18 @@ export default function App() {
           variant="permanent"
           anchor="left"
         >
+          <List
+            subheader={
+              <ListSubheader component="div" id="nested-list-subheader">
+                Theory
+              </ListSubheader>
+            }
+          >
+            <ListItem>
+              <Link to="/slides">Slides</Link>
+            </ListItem>
+          </List>
+          <Divider />
           <List
             subheader={
               <ListSubheader component="div" id="nested-list-subheader">
@@ -65,6 +78,9 @@ export default function App() {
         <Container>
           <Box>
             <Switch>
+              <Route exact path="/slides">
+                <Slides />
+              </Route>
               <Route exact path="/quiz-no-fsm">
                 <h1>Quiz example without a FSM</h1>
                 <QuizNoFSM />
