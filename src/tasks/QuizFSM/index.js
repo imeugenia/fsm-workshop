@@ -36,7 +36,7 @@ function QuizFSM() {
     //    reducer state. In order to do this
     //        - go back to `./reducer.js` file and add `questions: []` to the `initialState`,
     //        - dispatch "Request succeed" action that contains `event` and `questions`.
-    //          Eg.: dispatch({ event: "request_succeed", questions: data.results });
+    //          Eg.: dispatch({ event: "succeed", questions: data.results });
   }, [state.status]);
 
   React.useEffect(() => {

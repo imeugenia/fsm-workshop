@@ -4,7 +4,7 @@ import { fetchQuestions, getIsResultCorrect } from "../../utils";
 import Button from "@mui/lab/LoadingButton";
 import Question from "../../components/Question";
 import Results from "../../components/Results";
-import reducer, { STATUSES, initialState } from "./reducer";
+import reducer, { STATUSES, EVENTS, initialState } from "./reducer";
 
 function QuizFSM() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
@@ -12,7 +12,7 @@ function QuizFSM() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({ event: "submit" });
+    dispatch({ event: EVENTS.submit });
   };
 
   React.useEffect(() => {
@@ -20,9 +20,9 @@ function QuizFSM() {
       const data = await fetchQuestions();
 
       if (data.response_code > 0) {
-        dispatch({ event: "request_failed" });
+        dispatch({ event: EVENTS.failed });
       } else {
-        dispatch({ event: "request_succeed", questions: data.results });
+        dispatch({ event: EVENTS.succeed, questions: data.results });
       }
     };
 
@@ -30,11 +30,11 @@ function QuizFSM() {
       getQuestions();
     }
 
-    if (state.status === STATUSES.LOADING_RESULTS) {
+    if (state.status === STATUSES.VALIDATION) {
       const answers = serialize(formRef.current, { hash: true });
       const event = getIsResultCorrect(state.questions, answers)
-        ? "correct"
-        : "wrong";
+        ? EVENTS.validate_correct
+        : EVENTS.validate_incorrect;
       dispatch({ event });
     }
   }, [state.status, state.questions]);
@@ -43,7 +43,7 @@ function QuizFSM() {
     <div>
       <Button
         loading={state.status === STATUSES.LOADING_QUIZ}
-        onClick={() => dispatch({ event: "start" })}
+        onClick={() => dispatch({ event: EVENTS.start })}
         variant="contained"
       >
         Load a quiz
@@ -52,14 +52,14 @@ function QuizFSM() {
       {state.status === STATUSES.FAILURE && <div>{state.error}</div>}
 
       {state.status === STATUSES.QUIZ ||
-      state.status === STATUSES.LOADING_RESULTS ? (
+      state.status === STATUSES.VALIDATION ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {state.questions.map(({ question }, index) => {
             return <Question key={index} question={question} index={index} />;
           })}
           <Button
             type="submit"
-            loading={state.status === STATUSES.LOADING_RESULTS}
+            loading={state.status === STATUSES.VALIDATION}
             variant="contained"
           >
             Get results

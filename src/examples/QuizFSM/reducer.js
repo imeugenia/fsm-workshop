@@ -3,9 +3,18 @@ export const STATUSES = {
   LOADING_QUIZ: "LOADING_QUIZ",
   FAILURE: "FAILURE",
   QUIZ: "QUIZ",
-  LOADING_RESULTS: "LOADING_RESULTS",
+  VALIDATION: "VALIDATION",
   VICTORY: "VICTORY",
   DEFEAT: "DEFEAT",
+};
+
+export const EVENTS = {
+  start: "start",
+  succeed: "succeed",
+  failed: "failed",
+  submit: "submit",
+  validate_correct: "validate_correct",
+  validate_incorrect: "validate_incorrect",
 };
 
 export const initialState = {
@@ -16,14 +25,14 @@ export const initialState = {
 
 function reducer(state, action) {
   switch (action.event) {
-    case "start": {
+    case EVENTS.start: {
       return {
         ...initialState,
         status: STATUSES.LOADING_QUIZ,
       };
     }
 
-    case "request_succeed": {
+    case EVENTS.succeed: {
       return {
         ...initialState,
         questions: action.questions,
@@ -31,7 +40,7 @@ function reducer(state, action) {
       };
     }
 
-    case "request_failed": {
+    case EVENTS.failed: {
       return {
         ...initialState,
         error: "Error when loading questions",
@@ -39,21 +48,21 @@ function reducer(state, action) {
       };
     }
 
-    case "submit": {
+    case EVENTS.submit: {
       return {
         ...state,
-        status: STATUSES.LOADING_RESULTS,
+        status: STATUSES.VALIDATION,
       };
     }
 
-    case "correct": {
+    case EVENTS.validate_correct: {
       return {
         ...state,
         status: STATUSES.VICTORY,
       };
     }
 
-    case "wrong": {
+    case EVENTS.validate_incorrect: {
       return {
         ...state,
         status: STATUSES.DEFEAT,

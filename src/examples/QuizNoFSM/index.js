@@ -45,7 +45,6 @@ function QuizNoFSM() {
     setIsSubmitLoading(true);
     event.preventDefault();
     const answers = serialize(formRef.current, { hash: true });
-    console.log(answers);
     checkResults(answers);
     setIsSubmitLoading(false);
   };
@@ -60,6 +59,7 @@ function QuizNoFSM() {
         Load a quiz
       </Button>
 
+      {/* add accessible error component */}
       {quizRequestError && <div>{quizRequestError}</div>}
 
       {!isFormSubmitted && !isQuizLoading && questions.length > 0 ? (

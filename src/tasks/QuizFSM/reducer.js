@@ -4,7 +4,7 @@ export const STATUSES = {
   // 👉 Add more statuses below
 };
 
-// 2️⃣ Create an initial state. Currently, it consists only of a status.
+// 2️⃣ Add a status to the initCurrently, it consists only of a status.
 // We might add more data like `questions` soon, but for now skip
 // it as `status` it already defined :)
 export const initialState = {
