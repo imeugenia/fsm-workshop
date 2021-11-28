@@ -3,8 +3,8 @@ export const STATUSES = {
   OFF: "OFF",
 };
 
-const reducer = (status, action) => {
-  switch (action) {
+const reducer = (status, event) => {
+  switch (event) {
     case "toggle": {
       if (status === STATUSES.ON) {
         return STATUSES.OFF;

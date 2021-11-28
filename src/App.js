@@ -50,7 +50,7 @@ export default function App() {
             }
           >
             <ListItem>
-              <Link to="/task-toggle">Simple task</Link>
+              <Link to="/task-switch">Simple task</Link>
             </ListItem>
             <ListItem>
               <Link to="/task-quiz">Advanced task</Link>
@@ -71,7 +71,7 @@ export default function App() {
               <Link to="/quiz-fsm">"FSM" Example</Link>
             </ListItem>
             <ListItem>
-              <Link to="/toggle">Toggle example</Link>
+              <Link to="/switch">Switch example</Link>
             </ListItem>
           </List>
         </Drawer>
@@ -89,7 +89,7 @@ export default function App() {
                 <h1>Quiz example with a FSM</h1>
                 <QuizFSM />
               </Route>
-              <Route exact path="/toggle">
+              <Route exact path="/switch">
                 <h1>Switch example</h1>
                 <Toggle />
               </Route>
@@ -97,7 +97,7 @@ export default function App() {
                 <h1>Implement a quiz as a FSM!</h1>
                 <TaskQuiz />
               </Route>
-              <Route exact path="/task-toggle">
+              <Route exact path="/task-switch">
                 <h1>Implement a switch as a FSM!</h1>
                 <TaskToggle />
               </Route>
