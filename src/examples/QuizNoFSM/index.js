@@ -4,11 +4,12 @@ import Button from "@mui/lab/LoadingButton";
 import { fetchQuestions, getIsResultCorrect } from "../../utils";
 import Question from "../../components/Question";
 import Results from "../../components/Results";
+import Error from "../../components/Error";
 
 function QuizNoFSM() {
   const [questions, setQuestions] = React.useState([]);
   const [isQuizLoading, setIsQuizLoading] = React.useState(false);
-  const [quizRequestError, setQuizRequestError] = React.useState("");
+  const [isQuizRequestError, setIsQuizRequestError] = React.useState("");
   const [isSubmitLoading, setIsSubmitLoading] = React.useState(false);
   const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
   const [isResultCorrect, setIsResultCorrect] = React.useState(false);
@@ -18,22 +19,26 @@ function QuizNoFSM() {
   const resetStates = () => {
     setIsFormSubmitted(false);
     setIsResultCorrect(false);
-    setQuizRequestError(false);
+    setIsQuizRequestError(false);
   };
 
   const getQuestions = async () => {
     resetStates();
     setIsQuizLoading(true);
 
-    const data = await fetchQuestions();
+    try {
+      const data = await fetchQuestions();
 
-    if (data.response_code > 0) {
-      setQuizRequestError("Error when loading questions");
-    } else {
-      setQuestions(data.results);
+      if (data.response_code > 0) {
+        setIsQuizRequestError(true);
+      } else {
+        setQuestions(data.results);
+      }
+    } catch {
+      setIsQuizRequestError(true);
+    } finally {
+      setIsQuizLoading(false);
     }
-
-    setIsQuizLoading(false);
   };
 
   const checkResults = (answers) => {
@@ -55,12 +60,14 @@ function QuizNoFSM() {
         loading={isQuizLoading}
         onClick={getQuestions}
         variant="contained"
+        aria-describedby="loading-error"
+        aria-invalid={isQuizRequestError}
       >
         Load a quiz
       </Button>
 
       {/* add accessible error component */}
-      {quizRequestError && <div>{quizRequestError}</div>}
+      {isQuizRequestError && <Error id="loading-error" />}
 
       {!isFormSubmitted && !isQuizLoading && questions.length > 0 ? (
         <form ref={formRef} onSubmit={handleSubmit}>

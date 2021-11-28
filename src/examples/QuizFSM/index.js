@@ -4,6 +4,7 @@ import { fetchQuestions, getIsResultCorrect } from "../../utils";
 import Button from "@mui/lab/LoadingButton";
 import Question from "../../components/Question";
 import Results from "../../components/Results";
+import Error from "../../components/Error";
 import reducer, { STATUSES, EVENTS, initialState } from "./reducer";
 
 function QuizFSM() {
@@ -17,12 +18,16 @@ function QuizFSM() {
 
   React.useEffect(() => {
     const getQuestions = async () => {
-      const data = await fetchQuestions();
+      try {
+        const data = await fetchQuestions();
 
-      if (data.response_code > 0) {
+        if (data.response_code > 0) {
+          dispatch({ event: EVENTS.failed });
+        } else {
+          dispatch({ event: EVENTS.succeed, questions: data.results });
+        }
+      } catch {
         dispatch({ event: EVENTS.failed });
-      } else {
-        dispatch({ event: EVENTS.succeed, questions: data.results });
       }
     };
 
@@ -45,11 +50,13 @@ function QuizFSM() {
         loading={state.status === STATUSES.LOADING_QUIZ}
         onClick={() => dispatch({ event: EVENTS.start })}
         variant="contained"
+        aria-describedby="loading-error"
+        aria-invalid={state.status === STATUSES.FAILURE}
       >
         Load a quiz
       </Button>
 
-      {state.status === STATUSES.FAILURE && <div>{state.error}</div>}
+      {state.status === STATUSES.FAILURE && <Error id="loading-error" />}
 
       {state.status === STATUSES.QUIZ ||
       state.status === STATUSES.VALIDATION ? (
