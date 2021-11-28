@@ -8,22 +8,6 @@
       "question": "FLAC stands for &quot;Free Lossless Audio Condenser&quot;&#039;",
       "correct_answer": "False",
       "incorrect_answers": ["True"]
-    },
-    {
-      "category": "Entertainment: Video Games",
-      "type": "boolean",
-      "difficulty": "easy",
-      "question": "Ana was added as a new hero for the game Overwatch on July 19th, 2016.",
-      "correct_answer": "True",
-      "incorrect_answers": ["False"]
-    },
-    {
-      "category": "Science: Computers",
-      "type": "boolean",
-      "difficulty": "hard",
-      "question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
-      "correct_answer": "False",
-      "incorrect_answers": ["True"]
     }
   ]
 }

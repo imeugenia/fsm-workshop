@@ -1,5 +1,5 @@
 const Error = ({ id }) => (
-  <div id={id}>Error when loading questions. Please try again.</div>
+  <div id={id}>Quiz failed successfully. 💩 Please try again.</div>
 );
 
 export default Error;

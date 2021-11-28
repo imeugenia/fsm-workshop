@@ -1,29 +1,31 @@
-// 1️⃣ Define the statuses based on the state chart we created in the previous exercise
+// 1️⃣ Define the statuses based on the state chart we created in the previous
+//   exercise.
 export const STATUSES = {
   IDLE: "IDLE",
   // 👉 Add more statuses below
 };
 
-// 2️⃣ Add a status to the initCurrently, it consists only of a status.
-// We might add more data like `questions` soon, but for now skip
-// it as `status` it already defined :)
+// 2️⃣ Create an initial state. Currently, it consists only of a status.
+//    We might add more data like `questions` soon, but for now just uncomment
+//    the line below. :)
 export const initialState = {
-  status: STATUSES.IDLE,
+  // status: STATUSES.IDLE,
 };
 
 function reducer(state, event) {
   switch (event.type) {
     // 3️⃣ Add cases for all transitions between states based on the state chart
-    // Eg. case for transition between initial state and the loading state:
+    // E.g. case for transition between initial state and the loading state:
     // case "start": {
     //   return {
     //      ...initialState,
     //      status: STATUSES.LOADING_QUIZ,
     //   };
     // }
-    // ❗️ In case the state has not just `status` but other fields like `questions`,
-    // we should be careful about not loosing it. To do so, ensure you add initial state and
-    // new values for every field.
+    // ❗️ Pro tip for later: In case the state has not just the `status`
+    //    property but also other fields like `questions`, we should be careful
+    //    about not loosing them. To do so, ensure you spread the initial state
+    //    and new values for every field. Feel free to ignore this for now.
 
     default: {
       return state;
