@@ -25,10 +25,14 @@ export const initialState = {
 function reducer(state, event) {
   switch (event.type) {
     case EVENTS.start: {
-      return {
-        ...initialState,
-        status: STATUSES.LOADING,
-      };
+      if (![STATUSES.QUIZ, STATUSES.FAILURE, STATUSES.VALIDATION]) {
+        return {
+          ...initialState,
+          status: STATUSES.LOADING,
+        };
+      }
+
+      return state;
     }
 
     case EVENTS.succeed: {

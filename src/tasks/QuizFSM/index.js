@@ -59,13 +59,16 @@ function QuizFSM() {
 
   return (
     <div>
+      {/* 🔥 Look at the state chart and define the states from which it should
+       *    possible to load a quiz. Render `<Button />` only for them. */}
       <Button
         // 5️⃣ Check if the status is "LOADING" and set button `loading` prop
         //    accordingly.
         // loading={}
         onClick={startQuiz}
         variant="contained"
-        // 🔥 In case you are performing an extra task, uncomment 2 lines below.
+        // 🔥 In case you are performing an extra task about failure state,
+        //    uncomment 2 lines below.
         // aria-describedby="loading-error"
         // aria-invalid={state.status === STATUSES.FAILURE}
       >

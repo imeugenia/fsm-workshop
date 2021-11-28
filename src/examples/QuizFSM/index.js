@@ -46,15 +46,19 @@ function QuizFSM() {
 
   return (
     <div>
-      <Button
-        loading={state.status === STATUSES.LOADING}
-        onClick={() => dispatch({ type: EVENTS.start })}
-        variant="contained"
-        aria-describedby="loading-error"
-        aria-invalid={state.status === STATUSES.FAILURE}
-      >
-        Load a quiz
-      </Button>
+      {![STATUSES.QUIZ, STATUSES.FAILURE, STATUSES.VALIDATION].includes(
+        state.status
+      ) && (
+        <Button
+          loading={state.status === STATUSES.LOADING}
+          onClick={() => dispatch({ type: EVENTS.start })}
+          variant="contained"
+          aria-describedby="loading-error"
+          aria-invalid={state.status === STATUSES.FAILURE}
+        >
+          Load a quiz
+        </Button>
+      )}
 
       {state.status === STATUSES.FAILURE && <Error id="loading-error" />}
 
