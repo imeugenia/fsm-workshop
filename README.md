@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Finite State Machine in React applications
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+State management is a hard problem in applications not only on a global but also on the component level. It happens that components are over-stacked with boolean variables like `isLoading` , `isError`, and so on. That makes logic convoluted and easy to cause a bug.
 
-## Available Scripts
+This workshop is for developers with some experience in React who want to try shifting their state management paradigm. You will learn about a finite state machine pattern, draw your first state chart and implement a simple state machine using React without any additional library.
 
-In the project directory, you can run:
+By the end of the workshop, you will be able to implement the UI component state in a more clean and bug-free way.
 
-### `yarn start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Experience with React and React hooks
+
+### Setup
+
+If you would like to commit and push your work at the end of the workshop, you should fork first and then clone your fork repository.
+
+Run these commands to set up the project:
+
+```sh
+git clone https://github.com/imeugenia/fsm-workshop.git
+cd fsm-workshop
+yarn
+```
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+### Running the app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+yarn start
+```
 
-### `yarn build`
+### Exercises
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `src/tasks/OnOff` — a simple 2-state finite state machine implementation for a Toggle component.
+- `src/tasks/QuizFSM` — a more advanced finite state machine for a quiz application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You will find comments with instruction in both exercises. Some tips on how to follow them:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Both exercises start from `./reducer.js` files
+- Each instruction step is marked with number emoji, e.g. 1️⃣. Follow them in ascending order.
+- Helpful emojis:
+  - 💡 gives you useful tips
+  - ❗️ warns you about possible pitfalls
+  - 🔥 gives you an extra task
+  - 🏃 reminds when its time to run the app and check if your code is working.
