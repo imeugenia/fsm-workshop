@@ -14,9 +14,7 @@ export const fetchQuestions = () => {
 export const getIsResultCorrect = (questions, answers) => {
   let isCorrect = true;
   questions.forEach(({ correct_answer }, index) => {
-    const answer = answers[index] === "true" ? true : false;
-
-    if (answer !== correct_answer) {
+    if (answers[index] !== correct_answer.toLowerCase()) {
       isCorrect = false;
     }
   });
