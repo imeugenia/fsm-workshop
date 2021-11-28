@@ -11,8 +11,9 @@ function QuizFSM() {
   const formRef = React.useRef(null);
 
   const startQuiz = () => {
-    // 4️⃣ Dispatch start event to the reducer
-    // Eg.: dispatch({ event: 'start' })
+    // 💡 If you are looking for instructions 1 to 3, head to `./reducer.js`.
+    // 4️⃣ Dispatch "start" event to the reducer
+    // Eg.: dispatch({ type: 'start' })
   };
 
   const handleSubmit = (event) => {
@@ -36,7 +37,7 @@ function QuizFSM() {
     //    reducer state. In order to do this
     //        - go back to `./reducer.js` file and add `questions: []` to the `initialState`,
     //        - dispatch "Request succeed" action that contains `event` and `questions`.
-    //          Eg.: dispatch({ event: "succeed", questions: data.results });
+    //          Eg.: dispatch({ type: "succeed", questions: data.results });
   }, [state.status]);
 
   React.useEffect(() => {

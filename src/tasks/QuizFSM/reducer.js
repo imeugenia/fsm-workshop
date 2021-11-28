@@ -11,8 +11,8 @@ export const initialState = {
   status: STATUSES.IDLE,
 };
 
-function reducer(state, action) {
-  switch (action.event) {
+function reducer(state, event) {
+  switch (event.type) {
     // 3️⃣ Add cases for all transitions between states based on the state chart
     // Eg. case for transition between initial state and the loading state:
     // case "start": {

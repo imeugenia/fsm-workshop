@@ -23,8 +23,8 @@ export const initialState = {
   questions: [],
 };
 
-function reducer(state, action) {
-  switch (action.event) {
+function reducer(state, event) {
+  switch (event.type) {
     case EVENTS.start: {
       return {
         ...initialState,
@@ -35,7 +35,7 @@ function reducer(state, action) {
     case EVENTS.succeed: {
       return {
         ...initialState,
-        questions: action.questions,
+        questions: event.questions,
         status: STATUSES.QUIZ,
       };
     }

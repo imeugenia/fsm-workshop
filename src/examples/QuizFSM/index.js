@@ -13,7 +13,7 @@ function QuizFSM() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch({ event: EVENTS.submit });
+    dispatch({ type: EVENTS.submit });
   };
 
   React.useEffect(() => {
@@ -22,12 +22,12 @@ function QuizFSM() {
         const data = await fetchQuestions();
 
         if (data.response_code > 0) {
-          dispatch({ event: EVENTS.failed });
+          dispatch({ type: EVENTS.failed });
         } else {
-          dispatch({ event: EVENTS.succeed, questions: data.results });
+          dispatch({ type: EVENTS.succeed, questions: data.results });
         }
       } catch {
-        dispatch({ event: EVENTS.failed });
+        dispatch({ type: EVENTS.failed });
       }
     };
 
@@ -37,10 +37,10 @@ function QuizFSM() {
 
     if (state.status === STATUSES.VALIDATION) {
       const answers = serialize(formRef.current, { hash: true });
-      const event = getIsResultCorrect(state.questions, answers)
+      const type = getIsResultCorrect(state.questions, answers)
         ? EVENTS.validate_correct
         : EVENTS.validate_incorrect;
-      dispatch({ event });
+      dispatch({ type });
     }
   }, [state.status, state.questions]);
 
@@ -48,7 +48,7 @@ function QuizFSM() {
     <div>
       <Button
         loading={state.status === STATUSES.LOADING_QUIZ}
-        onClick={() => dispatch({ event: EVENTS.start })}
+        onClick={() => dispatch({ type: EVENTS.start })}
         variant="contained"
         aria-describedby="loading-error"
         aria-invalid={state.status === STATUSES.FAILURE}
