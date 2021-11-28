@@ -12,7 +12,7 @@ function QuizFSM() {
 
   const startQuiz = () => {
     // 💡 If you are looking for instructions 1 to 3, head to `./reducer.js`.
-    // 4️⃣ Dispatch "start" event to the reducer
+    // 4️⃣ Dispatch "start" event type to the reducer
     // Eg.: dispatch({ type: 'start' })
   };
 
@@ -21,7 +21,7 @@ function QuizFSM() {
     // 8️⃣ Dispatch "submit" event to reducer
   };
 
-  // 6️⃣ According to the state chart, once a machine enters "loading quiz" state
+  // 6️⃣ According to the state chart, once a machine enters "LOADING" state
   //   a request to get questions should be triggered. Data fetching is a
   //   side-effect that should be handled inside `React.useEffect()` hook.
   React.useEffect(() => {
@@ -36,32 +36,31 @@ function QuizFSM() {
     //       store them:
     //       - inside component state (with `useState`)
     //       - inside reducer state (alongside `status`)
-    //    💡 To keep component clean from the logic, I would recommend to store
-    //       all kind of data inside reducer state. In order to do this:
+    //    💡 To keep component clean from logic, I would recommend to store
+    //       all kind of data inside the reducer state. In order to do this:
     //        - go back to `./reducer.js` file and add `questions: []` to the
     //         `initialState`,
-    //        - dispatch "Request succeed" action that contains `event` and
-    //         `questions`.
-    //          Eg.: dispatch({ event: "LOAD", questions: data.results });
+    //        - dispatch an event that contains event `type` and `questions`.
+    //          E.g.: dispatch({ type: "load", questions: data.results });
   }, [state.status]);
 
   React.useEffect(() => {
     // 9️⃣ Part 1. Once "Get results" button is clicked the machine should enter
-    //    the "Loading results" state. In that case, check for the correctness
+    //    the "VALIDATION" state. In this state, check for the correctness
     //    of the answers and transition to the next state based on the result.
     //    Here is what you need to do:
-    //    1. Add an "if" statement to check for "Loading results" state.
-    //    2. Check for the correctness of the answers using the following lines
-    //       of code:
+    //    1. Add an if-statement to check for "VALIDATION" state.
+    //    2. Check for the correctness of the answers using the following code:
     //       const answers = serialize(formRef.current, { hash: true });
     //       const isCorrect = getIsResultCorrect(state.questions, answers);
     //    3. Transition to the next state using `dispatch`.
+    //    ❗️ Please continue to Part 2.
   }, [state.status, state.questions]);
 
   return (
     <div>
       <Button
-        // 5️⃣ Check if the status is "loading" and set button `loading` prop
+        // 5️⃣ Check if the status is "LOADING" and set button `loading` prop
         //    accordingly.
         // loading={}
         onClick={startQuiz}
@@ -86,13 +85,15 @@ function QuizFSM() {
       state.status === STATUSES.LOADING_RESULTS ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {/* 7️⃣ Uncomment the code below. ❗️ In case you are not storing
-           *    questions in reducer state change `state.questions` to the
+           *    questions in reducer state, change `state.questions` to the
            *    component state variable you have defined. */}
+
           {/* {state.questions.map(({ question }, index) => {
             return <Question key={index} question={question} index={index} />;
           })} */}
+
           {/* 9️⃣ Part 2.
-           *    Check if the status is "loading results" and set button loading
+           *    Check if the status is "VALIDATION" and set button loading
            *    prop accordingly.
            */}
           <Button
@@ -104,7 +105,9 @@ function QuizFSM() {
           </Button>
         </form>
       ) : null}
-      {/* 🔟  Uncomment the line below to enable display of the results based on the state */}
+
+      {/* 🔟  Uncomment the line below to enable display of the results based on
+       *     the state */}
       {/* <Results status={state.status} /> */}
     </div>
   );

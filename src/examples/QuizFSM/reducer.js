@@ -1,6 +1,6 @@
 export const STATUSES = {
   IDLE: "IDLE",
-  LOADING_QUIZ: "LOADING_QUIZ",
+  LOADING: "LOADING",
   FAILURE: "FAILURE",
   QUIZ: "QUIZ",
   VALIDATION: "VALIDATION",
@@ -19,7 +19,6 @@ export const EVENTS = {
 
 export const initialState = {
   status: STATUSES.IDLE,
-  error: "",
   questions: [],
 };
 
@@ -28,7 +27,7 @@ function reducer(state, event) {
     case EVENTS.start: {
       return {
         ...initialState,
-        status: STATUSES.LOADING_QUIZ,
+        status: STATUSES.LOADING,
       };
     }
 
@@ -43,7 +42,6 @@ function reducer(state, event) {
     case EVENTS.failed: {
       return {
         ...initialState,
-        error: "Error when loading questions",
         status: STATUSES.FAILURE,
       };
     }

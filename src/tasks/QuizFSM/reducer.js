@@ -1,5 +1,6 @@
 // 1️⃣ Define the statuses based on the state chart we created in the previous
-//   exercise.
+//   exercise, i.e. "LOADING" (when the questions are loading), "VALIDATION"
+//   (when the answers are validated), etc.
 export const STATUSES = {
   IDLE: "IDLE",
   // 👉 Add more statuses below
@@ -19,7 +20,7 @@ function reducer(state, event) {
     // case "start": {
     //   return {
     //      ...initialState,
-    //      status: STATUSES.LOADING_QUIZ,
+    //      status: STATUSES.LOADING,
     //   };
     // }
     // ❗️ Pro tip for later: In case the state has not just the `status`

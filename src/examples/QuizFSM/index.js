@@ -31,7 +31,7 @@ function QuizFSM() {
       }
     };
 
-    if (state.status === STATUSES.LOADING_QUIZ) {
+    if (state.status === STATUSES.LOADING) {
       getQuestions();
     }
 
@@ -47,7 +47,7 @@ function QuizFSM() {
   return (
     <div>
       <Button
-        loading={state.status === STATUSES.LOADING_QUIZ}
+        loading={state.status === STATUSES.LOADING}
         onClick={() => dispatch({ type: EVENTS.start })}
         variant="contained"
         aria-describedby="loading-error"
