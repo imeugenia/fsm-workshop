@@ -6,11 +6,11 @@ export const STATUSES = {
   // 👉 Add more statuses below
 };
 
-// 2️⃣ Create an initial state. Currently, it consists only of a status.
-//    We might add more data like `questions` soon, but for now just uncomment
-//    the line below. :)
+// 2️⃣ The next step is creating an initial state. Currently, it consists only
+//    of a status. We might add more data like `questions` soon. As the status
+//    is already defined, feel free to continue to the next step :)
 export const initialState = {
-  // status: STATUSES.IDLE,
+  status: STATUSES.IDLE,
 };
 
 function reducer(state, event) {
