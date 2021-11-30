@@ -35,3 +35,6 @@ function reducer(state, event) {
 }
 
 export default reducer;
+
+// 🏁 Thank you for participating and well done on completing the workshop!
+//   Please, fill out the feedback form: https://forms.gle/Y624DthNFXriUftt9
