@@ -41,7 +41,7 @@ function QuizFSM() {
     //        - go back to `./reducer.js` file and add `questions: []` to the
     //         `initialState`,
     //        - dispatch an event that contains event `type` and `questions`.
-    //          E.g.: dispatch({ type: "load", questions: data.results });
+    //          E.g.: dispatch({ type: "succeed", questions: data.results });
   }, [state.status]);
 
   React.useEffect(() => {
@@ -64,6 +64,7 @@ function QuizFSM() {
       <Button
         // 5️⃣ Check if the status is "LOADING" and set button `loading` prop
         //    accordingly.
+        // 🏃 Run the app to check if you can transition to "LOADING" state.
         // loading={}
         onClick={startQuiz}
         variant="contained"
@@ -89,7 +90,8 @@ function QuizFSM() {
         <form ref={formRef} onSubmit={handleSubmit}>
           {/* 7️⃣ Uncomment the code below. ❗️ In case you are not storing
            *    questions in reducer state, change `state.questions` to the
-           *    component state variable you have defined. */}
+           *    component state variable you have defined.
+           *  🏃 Run the app to check if you can see a quiz question. */}
 
           {/* {state.questions.map(({ question }, index) => {
             return <Question key={index} question={question} index={index} />;
@@ -110,10 +112,16 @@ function QuizFSM() {
       ) : null}
 
       {/* 🔟  Uncomment the line below to enable display of the results based on
-       *     the state */}
+       *     the state.
+       *  🏃  Run the app to check if you can see the results. If no, make sure
+       *     you completed step 9 entirely. If yes, congrats! You may continue
+       *     to extra tasks marked as 🔥 */}
       {/* <Results status={state.status} /> */}
     </div>
   );
 }
 
 export default QuizFSM;
+
+// 🏁 Thank you for participating and well done on completing the workshop!
+//   Please, fill out the feedback form: https://forms.gle/Y624DthNFXriUftt9
