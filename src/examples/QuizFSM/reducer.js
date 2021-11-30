@@ -25,7 +25,11 @@ export const initialState = {
 function reducer(state, event) {
   switch (event.type) {
     case EVENTS.start: {
-      if (![STATUSES.QUIZ, STATUSES.FAILURE, STATUSES.VALIDATION]) {
+      if (
+        ![STATUSES.QUIZ, STATUSES.FAILURE, STATUSES.VALIDATION].includes(
+          state.status
+        )
+      ) {
         return {
           ...initialState,
           status: STATUSES.LOADING,
