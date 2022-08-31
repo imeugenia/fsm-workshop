@@ -1,0 +1,10 @@
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz {
+  text-align: center;
+}

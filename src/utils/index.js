@@ -7,7 +7,7 @@ export const fetchQuestions = () => {
           resolve(data);
         })
         .catch(() => reject());
-    }, 2000);
+    }, 3000);
   });
 };
 

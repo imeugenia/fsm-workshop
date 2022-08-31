@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import QuizNoFSM from "./examples/QuizNoFSM";
 import QuizFSM from "./examples/QuizFSM";
 import Toggle from "./examples/OnOff";
+import Demo from "./demo/QuizFsmVanillaFunctions";
 import TaskQuiz from "./tasks/QuizFSM";
 import TaskToggle from "./tasks/OnOff";
 import Slides from "./theory/Slides";
@@ -76,8 +77,19 @@ export default function App() {
           </List>
         </Drawer>
         <Container>
-          <Box>
+          <Box
+            sx={{
+              height: "100vh",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <Switch>
+              <Route exact path="/demo">
+                <Demo />
+              </Route>
+
               <Route exact path="/slides">
                 <Slides />
               </Route>

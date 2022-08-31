@@ -14,7 +14,11 @@ const Results = ({ status, isCorrect }) => {
   if (!status) {
     return (
       <div style={styles.box}>
-        {isCorrect ? <span>Yay! 🎉</span> : <span>Oh noes! 👎</span>}
+        {isCorrect ? (
+          <span>Yay! The answer is correct 🎉</span>
+        ) : (
+          <span>Oh noes! The answer is wrong 👎</span>
+        )}
       </div>
     );
   }
@@ -24,8 +28,12 @@ const Results = ({ status, isCorrect }) => {
   return (
     show && (
       <div style={styles.box}>
-        {status === STATUSES.VICTORY && <span>Yay! 🎉</span>}
-        {status === STATUSES.DEFEAT && <span>Oh noes! 👎</span>}
+        {status === STATUSES.VICTORY && (
+          <span>Yay! The answer is correct 🎉</span>
+        )}
+        {status === STATUSES.DEFEAT && (
+          <span>Oh noes! The answer is wrong 👎</span>
+        )}
       </div>
     )
   );

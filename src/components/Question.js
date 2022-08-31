@@ -5,6 +5,7 @@ import Answers from "./Answers";
 const styles = {
   box: {
     margin: "2em 0",
+    width: "40ch",
   },
 };
 

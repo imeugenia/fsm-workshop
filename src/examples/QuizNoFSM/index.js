@@ -50,8 +50,10 @@ function QuizNoFSM() {
     setIsSubmitLoading(true);
     event.preventDefault();
     const answers = serialize(formRef.current, { hash: true });
-    checkResults(answers);
-    setIsSubmitLoading(false);
+    setTimeout(() => {
+      checkResults(answers);
+      setIsSubmitLoading(false);
+    }, 3000);
   };
 
   return (
@@ -69,7 +71,9 @@ function QuizNoFSM() {
       {/* add accessible error component */}
       {isQuizRequestError && <Error id="loading-error" />}
 
-      {!isFormSubmitted && !isQuizLoading && questions.length > 0 ? (
+      {(!isFormSubmitted || isSubmitLoading) &&
+      !isQuizLoading &&
+      questions.length > 0 ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {questions.map(({ question }, index) => {
             return <Question key={index} question={question} index={index} />;
@@ -79,7 +83,11 @@ function QuizNoFSM() {
           </Button>
         </form>
       ) : null}
-      <div>{isFormSubmitted && <Results isCorrect={isResultCorrect} />}</div>
+      <div>
+        {isFormSubmitted && !isSubmitLoading && (
+          <Results isCorrect={isResultCorrect} />
+        )}
+      </div>
     </div>
   );
 }

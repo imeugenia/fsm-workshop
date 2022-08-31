@@ -83,10 +83,10 @@ function QuizFSM() {
              and, in case of a request error, dispatch a failure event. Also, 
              there should be an additional failure state added to reducer.
       */}
-      {/* {state.status === STATUSES.FAILURE && <Error id="loading-error"} */}
+      {/* {state.status === STATUSES.FAILURE && <Error id="loading-error" />} */}
 
       {state.status === STATUSES.QUIZ ||
-      state.status === STATUSES.LOADING_RESULTS ? (
+      state.status === STATUSES.VALIDATION ? (
         <form ref={formRef} onSubmit={handleSubmit}>
           {/* 7️⃣ Uncomment the code below. ❗️ In case you are not storing
            *    questions in reducer state, change `state.questions` to the
